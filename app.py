@@ -8,7 +8,6 @@ import json
 import os
 import io
 import base64
-
 import qrcode
 from flask import Flask, render_template, jsonify, request
 
