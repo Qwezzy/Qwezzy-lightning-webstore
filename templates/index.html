@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 style="color: #ffeb3b; margin-bottom: 5px;">Browse Products</h2>
+<p style="color: #888;">Pay instantly with Lightning Network</p>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        <div class="product-emoji">{{ product.emoji | safe }}</div>
+        <h3>{{ product.name }}</h3>
+        <p class="description">{{ product.description }}</p>
+        <div class="price">
+            {{ "{:,}".format(product.price) }} sats
+            <span class="sats">({{ "%.8f" | format(product.price / 100000000) }} BTC)</span>
+        </div>
+        <a href="/checkout/{{ product.id }}" class="btn btn-pay">
+            Pay with Lightning
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
