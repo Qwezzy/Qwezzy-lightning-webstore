@@ -13,6 +13,10 @@
         {{ payment_request }}
     </div>
 
+    <div class="expiry-timer" style="text-align: center; margin: 10px 0; font-weight: bold; color: #ff4444;">
+        Expires in: <span id="time-remaining">--:--</span>
+    </div>
+
     <div class="payment-status status-waiting" id="payment-status">
         <span class="spinner"></span>
         Waiting for payment...
@@ -23,7 +27,8 @@
         <ol>
             <li>Copy the invoice above (click it)</li>
             <li>In your terminal, run:<br>
-                <code>alice payinvoice INVOICE</code></li>
+                <code>alice payinvoice INVOICE</code>
+            </li>
             <li>Type <code>yes</code> to confirm</li>
             <li>This page updates automatically!</li>
         </ol>
@@ -37,7 +42,33 @@
 <script>
     const rHash = "{{ r_hash }}";
     const productId = "{{ product.id }}";
+    const creationDate = {{ creation_date }};
+    const expirySeconds = {{ expiry }};
+    const expiryTimestamp = creationDate + expirySeconds;
     let polling = true;
+
+    function updateTimer() {
+        const now = Math.floor(Date.now() / 1000);
+        const remaining = expiryTimestamp - now;
+
+        if (remaining <= 0) {
+            document.getElementById('time-remaining').innerText = "EXPIRED";
+            document.getElementById('payment-status').innerHTML = "Invoice Expired";
+            document.getElementById('payment-status').className = "payment-status status-error";
+            polling = false;
+            return;
+        }
+
+        const minutes = Math.floor(remaining / 60);
+        const seconds = remaining % 60;
+        document.getElementById('time-remaining').innerText = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+        if (polling) {
+            setTimeout(updateTimer, 1000);
+        }
+    }
+
+    updateTimer();
 
     function copyInvoice() {
         const text = document.getElementById('invoice-text').innerText;

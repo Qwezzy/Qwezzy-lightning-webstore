@@ -85,12 +85,17 @@ def checkout(product_id):
         # Generate QR code
         qr_base64 = generate_qr_base64(payment_request.upper())
 
+        creation_date = int(result.get("creation_date", 0))
+        expiry = int(result.get("expiry", 3600))
+
         return render_template(
             "checkout.html",
             product=product,
             payment_request=payment_request,
             r_hash=r_hash,
             qr_base64=qr_base64,
+            creation_date=creation_date,
+            expiry=expiry,
         )
     except Exception as e:
         return render_template(

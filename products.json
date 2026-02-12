@@ -35,10 +35,31 @@
         "emoji": "&#127891;"
     },
     {
-        "id": "donation",
+        "id": "donation_10k",
         "name": "Support the Bootcamp",
-        "description": "Help fund future Bitcoin bootcamps in Africa",
+        "description": "Help fund future Bitcoin bootcamps in Africa (10k sats)",
         "price": 10000,
+        "emoji": "&#10084;"
+    },
+    {
+        "id": "donation_20k",
+        "name": "Support the Bootcamp",
+        "description": "Help fund future Bitcoin bootcamps in Africa (20k sats)",
+        "price": 20000,
+        "emoji": "&#10084;"
+    },
+    {
+        "id": "donation_50k",
+        "name": "Support the Bootcamp",
+        "description": "Help fund future Bitcoin bootcamps in Africa (50k sats)",
+        "price": 50000,
+        "emoji": "&#10084;"
+    },
+    {
+        "id": "donation_140k",
+        "name": "Support the Bootcamp",
+        "description": "Help fund future Bitcoin bootcamps in Africa (140k sats)",
+        "price": 140000,
         "emoji": "&#10084;"
     }
 ]
